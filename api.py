@@ -55,7 +55,6 @@ class Map(QWidget):
         step = 0.001
         if event.key() == Qt.Key_PageUp and self.zoom > 50:
             self.zoom += 0.001
-            print('1')
         elif event.key() == Qt.Key_PageDown and self.zoom > 0.001:
             self.zoom -= 0.001
         elif event.key() == Qt.Key_Left and self.long < 170:
