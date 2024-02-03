@@ -128,13 +128,13 @@ class Map(QWidget):
 
     def keyPressEvent(self, event):
         step = 0.001
-        if event.key() == Qt.Key_PageUp and self.zoom < 19:
+        if event.key() == Qt.Key_PageUp and self.zoom > 50:
             self.zoom += 0.001
         elif event.key() == Qt.Key_PageDown and self.zoom > 0.001:
             self.zoom -= 0.001
-        elif event.key() == Qt.Key_Left and self.long < 100:
+        elif event.key() == Qt.Key_Left and self.long < 170:
             self.long -= step
-        elif event.key() == Qt.Key_Right and self.long < 100:
+        elif event.key() == Qt.Key_Right and self.long < 170:
             self.long += step
         elif event.key() == Qt.Key_Up and self.width < 100:
             self.width += step
