@@ -79,6 +79,12 @@ class Map(QWidget):
         except Exception:
             self.error.setText('Адрес не найден')
             self.address.setText('')
+    
+    def change_layer(self):
+        layer_dict = {"Схема": "map", "Спутник": "sat", "Гибрид": "sat,skl"}
+        self.type = layer_dict[self.sender().text()]
+        self.get_image()
+        self.update_pixmap()
 
     def reset(self):
         self.long = 92.954818
@@ -99,19 +105,34 @@ class Map(QWidget):
         self.image.move(0, 0)
         self.image.resize(600, 450)
         self.update_pixmap()
+        
+        self.button_scheme = QPushButton('Схема', self)
+        self.button_scheme.resize(60, 30)
+        self.button_scheme.move(605, 0)
+        self.button_scheme.clicked.connect(self.change_layer)
+        
+        self.button_satellite = QPushButton('Спутник', self)
+        self.button_satellite.resize(60, 30)
+        self.button_satellite.move(675, 0)
+        self.button_satellite.clicked.connect(self.change_layer)
+        
+        self.button_hybrid = QPushButton('Гибрид', self)
+        self.button_hybrid.resize(60, 30)
+        self.button_hybrid.move(745, 0)
+        self.button_hybrid.clicked.connect(self.change_layer)
 
         self.search_button = QPushButton('Поиск', self)
         self.search_button.resize(200, 30)
-        self.search_button.move(605, 40)
-
+        self.search_button.move(605, 80)
         self.search_button.clicked.connect(self.search)
+
         self.search_label = QLineEdit(self)
         self.search_label.resize(200, 30)
-        self.search_label.move(605, 0)
+        self.search_label.move(605, 40)
 
         self.reset_button = QPushButton('Сброс поискового результата', self)
         self.reset_button.resize(200, 30)
-        self.reset_button.move(605, 80)
+        self.reset_button.move(605, 120)
         self.reset_button.clicked.connect(self.reset)
 
         self.address = QLabel(self)
